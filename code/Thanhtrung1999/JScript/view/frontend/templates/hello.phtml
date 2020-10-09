@@ -1,0 +1,144 @@
+<?php
+/**
+ * @var \Thanhtrung1999\JScript\Block\Index $block
+ */
+
+?>
+<style type="text/css">
+    #bg-loading{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        opacity: .6;
+    }
+    .lds-hourglass {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+    }
+    .lds-hourglass:after {
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        width: 0;
+        height: 0;
+        margin: 8px;
+        box-sizing: border-box;
+        border: 32px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: lds-hourglass 1.2s infinite;
+    }
+    @keyframes lds-hourglass {
+        0% {
+            transform: rotate(0);
+            animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        }
+        50% {
+            transform: rotate(900deg);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        100% {
+            transform: rotate(1800deg);
+        }
+    }
+
+
+    table {  font-family: arial, sans-serif;  border-collapse: collapse;  width: 100%;  margin-top: 30px;}
+    td, th {  border: 1px solid #dddddd;  text-align: left;  padding: 8px;  }
+    tr:nth-child(even) { background-color:#bebebe; }
+    .post-id{width:2%}
+    .post-name{width:30%}
+    .status{width: 4%}
+    .action{width: 10%}
+</style>
+
+<div data-mage-init='{"hello": {"message": "HELLO WORLD!"}}'>
+    Content
+</div>
+
+<div class="post-contents">
+    <table>
+        <tr>
+            <th class="post-id">Id</th>
+            <th class="post-name">Name</th>
+            <th>Content</th>
+            <th class="status">Status</th>
+            <th class="action"></th>
+        </tr>
+        <?php if (!empty($block->getPostCollection())):?>
+            <?php foreach ($block->getPostCollection() as $key => $item):?>
+                <tr>
+                    <td><?= $item->getPostId();?></td>
+                    <td><?= $item->getName();?></td>
+                    <td><?= $item->getPostContent();?></td>
+                    <td><span id="status-item-<?= $item->getPostId(); ?>"><?= $item->getStatus(); ?></span></td>
+                    <td>
+                        <a href="#" id="post-item-<?= $item->getPostId() ?>" class="post-item"><?= __('Change status');?></a>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+        <?php endif;?>
+    </table>
+</div>
+<input type="hidden" id="change-status-url" value="<?= $block->getUrl('js/index/changestatus') ?>">
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ],function ($,alert) {
+        "use strict"
+        let postItem = {
+            change_status_url : '',
+            change_status: function (postId) {
+                console.log('Post Id'+postId);
+                let self = this;
+                $('body').append('<div id="bg-loading"></div>');
+                $('#bg-loading').append('<div class="lds-hourglass"></div>');
+                $.ajax({
+                    url : self.change_status_url,
+                    dataType: 'json',
+                    type: 'POST',
+                    data : {post_id: postId},
+                    success : function (response) {
+                        if(response.status === 'success')
+                        {
+                            $('#bg-loading').remove();
+                            $('.lds-hourglass').remove();
+                            $('#status-item-'+postId).html(response.new_status)
+                            alert({
+                                title : 'Success',
+                                content :'You have changed status successfully!'
+                            });
+                        }
+                    },
+                    error : function () {
+                        $('#bg-loading').remove();
+                        $('.lds-roller').remove();
+                        alert({
+                            title : 'Error',
+                            content :'Error, Please try again !'
+                        });
+                    }
+                });
+            },
+            init : function () {
+                let self = this;
+                self.change_status_url = $("#change-status-url").val();
+                $('.post-item').click(function () {
+                    let postId = $(this).attr('id');
+                    postId = postId.replace('post-item-','');
+                    self.change_status(postId);
+                });
+            }
+        }
+        postItem.init();
+    })
+</script>
