@@ -10,6 +10,7 @@ class ChangeDisplayText implements ObserverInterface
     {
         $displayText = $observer->getData('mp_text');
         echo $displayText->getText() . " - Event </br>";
+        echo $displayText->getString() . " - 1999 <br/>";
         $displayText->setText('Execute event successfully.');
 
         return $this;

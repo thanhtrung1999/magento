@@ -9,9 +9,13 @@ class Test extends Action
 
     public function execute()
     {
-        $textDisplay = new DataObject(['text' => 'Tigren']);
+        $textDisplay = new DataObject([
+            'text' => 'Tigren',
+            'string' => 'Trung'
+        ]);
         $this->_eventManager->dispatch('thanhtrung1999_helloworld_display_text', ['mp_text' => $textDisplay]);
-        echo $textDisplay->getText();
+        echo $textDisplay->getText() . "<br/>";
+        echo $textDisplay->getString();
         exit;
     }
 }
