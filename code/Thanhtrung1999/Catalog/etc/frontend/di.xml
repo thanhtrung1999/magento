@@ -1,0 +1,5 @@
+<config>
+    <type name="Magento\Catalog\Api\Data\ProductInterface">
+        <plugin name="newProductFlag" type="Thanhtrung1999\Catalog\Plugin\NewProductFlag"/>
+    </type>
+</config>
