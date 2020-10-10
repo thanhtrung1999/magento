@@ -10,6 +10,7 @@ class HelloWorld extends Action
     /**
      * @var PageFactory $pageFactory
      */
+    protected $pageFactory;
 
     /**
      * HelloWorld constructor.
