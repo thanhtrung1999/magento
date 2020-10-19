@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Thanhtrung1999_Hospital::hospital" title="Hospital" module="Thanhtrung1999_Hospital" sortOrder="51" resource="Thanhtrung1999_Hospital::hospital"/>
+        <add id="Thanhtrung1999_Hospital::hospitals" title="Manage Hospitals" module="Thanhtrung1999_Hospital" sortOrder="10" action="hospital/hospitals" resource="Thanhtrung1999_Hospital::hospitals" parent="Thanhtrung1999_Hospital::hospital"/>
+        <add id="Thanhtrung1999_Hospital::hospital_configuration" title="Configuration" module="Thanhtrung1999_Hospital" sortOrder="99" parent="Thanhtrung1999_Hospital::hospital" action="adminhtml/system_config/edit/section/hospital" resource="Thanhtrung1999_Hospital::hospital_configuration"/>
+    </menu>
+</config>
