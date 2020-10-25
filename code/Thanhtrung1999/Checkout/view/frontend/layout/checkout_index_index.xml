@@ -1,0 +1,81 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <!-- Modifying an existing step-->
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <!-- -->
+                                                    <item name="children" xsi:type="array">
+                                                        <!-- -->
+                                                        <item name="before-form" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="newsletter" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Thanhtrung1999_Checkout/js/view/newsletter</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                        <!-- -->
+                                                        <item name="before-shipping-method-form" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="shipping_policy" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Magento_Shipping/js/view/checkout/shipping/shipping-policy</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                    <!-- -->
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="shippingMethodItemTemplate" xsi:type="string">Thanhtrung1999_Checkout/custom-method-item-template</item>
+                                                        <item name="shippingMethodListTemplate" xsi:type="string">Thanhtrung1999_Checkout/custom-method-list-template</item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                        <!-- The new step you add -->
+                                        <item name="check-login-step" xsi:type="array">
+                                            <item name="component" xsi:type="string">Thanhtrung1999_Checkout/js/view/checkout-login-step</item>
+                                            <!--To display step content before shipping step "sortOrder" value should be < 1-->
+                                            <!--To display step content between shipping step and payment step  1 < "sortOrder" < 2 -->
+                                            <!--To display step content after payment step "sortOrder" > 2 -->
+                                            <item name="sortOrder" xsi:type="string">2</item>
+                                            <item name="children" xsi:type="array">
+                                                <!--add here child component declaration for your step-->
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <!--Sidebar-->
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="summary" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="summary-discount" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount</item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="errors" xsi:type="array">
+                                                            <item name="sortOrder" xsi:type="string">0</item>
+                                                            <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount-messages</item>
+                                                            <item name="displayArea" xsi:type="string">messages</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
