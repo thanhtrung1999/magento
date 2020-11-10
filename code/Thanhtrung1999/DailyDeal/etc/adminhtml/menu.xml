@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Thanhtrung1999_DailyDeal::daily_deal" title="Deal" module="Thanhtrung1999_DailyDeal" sortOrder="21" resource="Thanhtrung1999_DailyDeal::daily_deal"/>
+        <add id="Thanhtrung1999_DailyDeal::deal_menu" title="Manage Deals" module="Thanhtrung1999_DailyDeal" sortOrder="10" action="tigren/deal/index" resource="Thanhtrung1999_DailyDeal::deal" parent="Thanhtrung1999_DailyDeal::daily_deal"/>
+        <add id="Thanhtrung1999_DailyDeal::deal_configuration" title="Configuration" module="Thanhtrung1999_DailyDeal" sortOrder="99" parent="Thanhtrung1999_DailyDeal::daily_deal" action="adminhtml/system_config/edit/section/deal" resource="Thanhtrung1999_DailyDeal::deal_configuration"/>
+    </menu>
+</config>
